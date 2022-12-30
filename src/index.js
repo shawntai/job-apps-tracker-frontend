@@ -11,12 +11,8 @@ import Create from "./pages/Create";
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <App />,
+		element: <AuthPage />,
 	},
-  {
-    path: "/login",
-    element: <Login />,
-  },
   {
     path: "/auth",
     element: <AuthPage />,
