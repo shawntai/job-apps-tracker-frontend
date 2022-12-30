@@ -93,7 +93,7 @@ const Jobs = () => {
 			dataIndex: "company",
 			key: "company",
 			render: (text, record) => (
-				<a href={`/jobs/${record._id}`}>{text}</a>
+				<a onClick={() => navigate(`/jobs/${record._id}`)}>{text}</a>
 			),
 		},
 		{
@@ -179,7 +179,10 @@ const Jobs = () => {
 					{/* <Col span={18} style={{ backgroundColor: "" }}></Col>
 					<Col span={6} style={{ backgroundColor: "", padding: "10px 0px 10px 0px"}}> */}
 					<Button type="primary" style={{ margin: "15px" }}>
-						<a href="/create" style={{ color: "white" }}>
+						<a
+							onClick={() => navigate("/create")}
+							style={{ color: "white" }}
+						>
 							Add Application
 						</a>
 					</Button>
