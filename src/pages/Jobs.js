@@ -164,6 +164,7 @@ const Jobs = () => {
 						type="flex"
 						align="middle"
 						onClick={showDrawer}
+						style={{ cursor: "pointer" }}
 					>
 						<UserOutlined
 							style={{ fontSize: "200%", width: "100%" }}
