@@ -13,7 +13,7 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	const onFinish = (body) => {
-		// console.log("Success:", body);
+		console.log("Success:", body);
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}api/v1/auth/login`, body)
 			.then((res) => {
@@ -36,7 +36,12 @@ const Login = () => {
 
 	return (
 		<>
-			<Form onFinish={onFinish}>
+			<Form
+				onFinish={onFinish}
+				labelCol={{
+					span: 4,
+				}}
+			>
 				<Form.Item
 					label="Email"
 					name="email"

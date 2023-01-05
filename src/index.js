@@ -7,6 +7,7 @@ import AuthPage from "./pages/AuthPage";
 import Jobs from "./pages/Jobs";
 import Job from "./pages/Job";
 import Create from "./pages/Create";
+import Profile from "./pages/Profile";
 
 const router = createHashRouter([
 	{
@@ -26,8 +27,12 @@ const router = createHashRouter([
     element: <Job />,
   },
   {
-    path: "create",
+    path: "/create",
     element: <Create />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   }
 ]);
 

@@ -1,4 +1,5 @@
 import {
+	Avatar,
 	Button,
 	Col,
 	Divider,
@@ -83,7 +84,21 @@ const Jobs = () => {
 		// console.log(aUser);
 		// console.log("aUser's type: ", typeof aUser);
 		// setUser(aUser);
-		setUser(JSON.parse(localStorage.getItem("user")));
+
+		// setUser(JSON.parse(localStorage.getItem("user")));
+
+		axios
+			.get(`${process.env.REACT_APP_BACKEND_URL}api/v1/profile`, {
+				headers: {
+					Authorization: `Bearer ${JSON.parse(
+						localStorage.getItem("token")
+					)}`,
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				setUser(res.data);
+			});
 		fetchJobs();
 	}, []);
 
@@ -154,32 +169,47 @@ const Jobs = () => {
 		<>
 			<Header>
 				<Row type="flex" style={{ alignItems: "center" }}>
-					<Col span={20}>
+					<Col span={21}>
 						<Typography.Title level={3}>
 							My Job Applications
 						</Typography.Title>
 					</Col>
 					<Col
-						span={4}
+						span={3}
 						type="flex"
 						align="middle"
 						onClick={showDrawer}
 						style={{ cursor: "pointer" }}
 					>
-						<UserOutlined
+						{/* <UserOutlined
 							style={{ fontSize: "200%", width: "100%" }}
-						/>
-						<Typography style={{ width: "100%" }}>
+						/> */}
+						{/* <Avatar size={48}>{ user && user.name.slice(0, 1)}</Avatar> */}
+
+						<Avatar
+							size={48}
+							src={
+								user &&
+								`${process.env.REACT_APP_BACKEND_URL}${user.avatar}`
+							}
+						>
+							{user && !user.avatar && user.name.slice(0, 1)}
+						</Avatar>
+						{/* <Typography style={{ width: "100%" }}>
 							Hi, {user && user.name}
-						</Typography>
+						</Typography> */}
 					</Col>
 				</Row>
 			</Header>
 			<Content>
+				<Divider style={{ margin: "10px" }} />
 				<Row justify="end">
 					{/* <Col span={18} style={{ backgroundColor: "" }}></Col>
 					<Col span={6} style={{ backgroundColor: "", padding: "10px 0px 10px 0px"}}> */}
-					<Button type="primary" style={{ margin: "15px" }}>
+					<Button
+						type="primary"
+						style={{ margin: "5px 15px 15px 0px" }}
+					>
 						<a
 							onClick={() => navigate("/create")}
 							style={{ color: "white" }}
@@ -198,7 +228,16 @@ const Jobs = () => {
 			</Content>
 			<Footer></Footer>
 			<Drawer title="Account" onClose={onClose} open={drawerOpen}>
-				<Space direction="vertical" size="large">
+				<Space direction="vertical" size="small">
+					<Avatar
+						size={96}
+						src={
+							user &&
+							`${process.env.REACT_APP_BACKEND_URL}${user.avatar}`
+						}
+					>
+						{user && !user.avatar && user.name.slice(0, 1)}
+					</Avatar>
 					<Typography.Title level={4}>
 						{user && user.name}
 					</Typography.Title>
@@ -206,10 +245,16 @@ const Jobs = () => {
 						{user && user.email}
 					</Typography.Text>
 					<Divider />
-					<Button onClick={logout}>
-						<LogoutOutlined />
-						Log Out
-					</Button>
+					<Space.Compact>
+						<Button onClick={() => navigate("/profile")}>
+							<UserOutlined />
+							My Profile
+						</Button>
+						<Button danger onClick={logout}>
+							<LogoutOutlined />
+							Log Out
+						</Button>
+					</Space.Compact>
 				</Space>
 			</Drawer>
 			<Modal

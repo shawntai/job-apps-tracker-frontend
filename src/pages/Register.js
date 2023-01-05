@@ -12,7 +12,10 @@ const Register = () => {
 	const onFinish = (body) => {
 		// console.log("Success:", body);
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}api/v1/auth/register`, body)
+			.post(
+				`${process.env.REACT_APP_BACKEND_URL}api/v1/auth/register`,
+				body
+			)
 			.then((res) => {
 				console.log("user registered", res);
 				setToken(res.data.token);
@@ -27,7 +30,12 @@ const Register = () => {
 	return (
 		<>
 			{/* <Typography.Title level={2}> Log In </Typography.Title> */}
-			<Form onFinish={onFinish}>
+			<Form
+				onFinish={onFinish}
+				labelCol={{
+					span: 4,
+				}}
+			>
 				<Form.Item
 					label="Name"
 					name="name"
