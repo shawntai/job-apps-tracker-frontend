@@ -58,9 +58,12 @@ const Profile = () => {
 						size={64}
 						src={
 							user &&
+							user.avatar &&
 							`${process.env.REACT_APP_BACKEND_URL}${user.avatar}`
 						}
-					/>
+					>
+						{user && !user.avatar && user.name.slice(0, 1)}
+					</Avatar>
 					<Button onClick={() => hiddenFileInput.current.click()}>
 						Update Avatar
 					</Button>

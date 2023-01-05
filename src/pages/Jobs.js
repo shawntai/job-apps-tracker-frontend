@@ -190,6 +190,7 @@ const Jobs = () => {
 							size={48}
 							src={
 								user &&
+								user.avatar &&
 								`${process.env.REACT_APP_BACKEND_URL}${user.avatar}`
 							}
 						>
